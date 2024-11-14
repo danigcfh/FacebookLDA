@@ -12,18 +12,11 @@ library(ggplot2)  # For visualization
 library(topicmodels)
 library(viridis)
 
-# Load your LDA model 
-data <- readRDS("all_training_data.rds")
-best_sample_model <- data$sample_3[[8]]$lda_model
-terms(best_sample_model, 10)
 
-# Load test data
-test_data <- readRDS("test_data.rds")
-
-# Load your LDA model and test data
-data <- readRDS("all_training_data.rds")
+# Load LDA model and test data
+data <- readRDS("Data_all_training_data.rds")
 best_sample_model <- data$sample_3[[8]]$lda_model
-test_data <- readRDS("test_data.rds")
+test_data <- readRDS("Data_test_data.rds")
 
 # Combine test data while ensuring no overlap with training data
 tests <- bind_rows(test_data$posts$sample_data, 
@@ -76,7 +69,6 @@ sentiment_results <- get_nrc_sentiment(tests_df$text, language = "spanish")
 
 # Combine sentiment results with the original dataframe
 tests_df <- cbind(tests_df, sentiment_results)
-
 
 # Define emotion columns
 emotion_columns <- c("anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust")
@@ -135,50 +127,5 @@ tests_df <- tests_df %>%
 
 #Save final df with all the information
 
-#Vizualization
-# Load necessary libraries
-library(gplots)
-library(viridis)
-library(proxy)
-
-# Assuming `test_topics` is the matrix with topic probabilities for each observation
-# and `emotion_matrix` is the matrix of normalized emotion scores for each observation
-
-# Step 1: Generate Similarity Matrices
-# Calculate similarity matrices for topics and emotions
-topic_similarity_matrix <- proxy::simil(as.matrix(test_topics), method = "manhattan")
-emotion_similarity_matrix <- proxy::simil(as.matrix(tests_df[emotion_columns]), method = "manhattan")
-
-# Convert similarities to matrices for easy manipulation
-topic_similarity_matrix <- as.matrix(topic_similarity_matrix)
-emotion_similarity_matrix <- as.matrix(emotion_similarity_matrix)
-
-# Step 2: Combine Similarity Matrices
-# Average the topic and emotion similarity matrices to get a combined similarity matrix
-combined_similarity_matrix <- (topic_similarity_matrix + emotion_similarity_matrix) / 2
-
-# Step 3: Plot Heatmap of Combined Similarity Matrix
-png("combined_topic_emotion_similarity_heatmap_manhattan.png", width = 2400, height = 2400)
-heatmap.2(combined_similarity_matrix,
-          trace = "none",
-          col = viridis(50),
-          labRow = tests_df$account_handle,   # Row labels as account handles
-          labCol = tests_df$account_handle,   # Column labels as account handles
-          key.title = "Combined Similarity",
-          main = "Combined Topic and Emotion Similarity Heatmap",
-          density.info = "none",
-          cexRow = 0.5,
-          cexCol = 0.5
-          )
-dev.off()
-
-
-# Convert confusion matrix to a distance matrix for hierarchical clustering
-distance_matrix <- as.dist(1 - combined_similarity_matrix)
-hc <- hclust(distance_matrix, method = "ward.D2")
-
-# Plot dendrogram of page similarity
-plot(hc, labels = rownames(confusion_matrix), main = "Dendrogram of Page Similarity", xlab = "", sub = "", cex = 0.7)
-
-
+write.csv(tests_df,"tests_df.csv", row.names = FALSE)
 

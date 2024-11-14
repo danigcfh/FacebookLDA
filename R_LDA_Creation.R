@@ -25,7 +25,7 @@ library(tidyverse)
 library(stringr)
 set.seed(1234)
 
-posts <- read_csv("Copia de posts (1).csv")
+posts <- read_csv("Data_Copia de posts (1).csv")
 posts <- subset(posts, is.na(account_handle)==FALSE)
 posts$text <- ifelse(!is.na(posts$message), as.character(posts$message), "")  # If 'message' is not NA, use 'message'
 posts$text <- paste(posts$text, ifelse(!is.na(posts$description), as.character(posts$description), ""), sep = " ")  # If 'description' is not NA, concatenate it
@@ -33,7 +33,6 @@ posts$p_text <- tolower(posts$text)
 posts$p_text <- gsub("[[:punct:]]", "", posts$p_text)
 posts$p_text <- gsub("\\d+", "", posts$p_text)
 posts$p_text <- gsub("s$", "",  posts$p_text)
-
 
 # Additional preprocessing steps can be added as needed
 # Tokenize words using 'tokenizers' package
@@ -292,7 +291,7 @@ for (sample_index in 1:5) {
 print(all_combined_data_list$sample_1)
 
 # Save the list containing all combined data
-saveRDS(all_combined_data_list, file = "all_training_data.rds")
+saveRDS(all_combined_data_list, file = "Data_all_training_data.rds")
 
 
 
@@ -433,7 +432,7 @@ for (page_key in page_keys_list) {
 names(pages_combined_data_list)
 
 # Save the list containing all combined data
-saveRDS(pages_combined_data_list, file = "all_pages_data.rds")
+saveRDS(pages_combined_data_list, file = "Data_all_pages_data.rds")
 
 
 # Creation of a testing set
@@ -501,7 +500,7 @@ test_samples[["sample_corpus"]] <- non_empty_corpus_test
 combined_data <- list(dtm = test_samples_dtm, corpus = test_samples, posts = tests)
 
 # Save the list
-saveRDS(combined_data, file = "test_data.rds")
+saveRDS(combined_data, file = "Data_test_data.rds")
 
 # Initialize lists to store results for pages testing set
 pages_test_samples_dtm <- list()
@@ -584,7 +583,7 @@ for (current_page in unique_pages) {
 }
 
 # Save the list for pages testing set
-saveRDS(pages_test_data, file = "pages_test_data.rds")
+saveRDS(pages_test_data, file = "Data_pages_test_data.rds")
 
 
 

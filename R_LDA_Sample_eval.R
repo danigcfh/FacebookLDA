@@ -4,10 +4,10 @@ library(topicmodels)
 library(ldatuning)
 
 # Load the training data
-all_combined_data_list <- readRDS("all_training_data.rds")
+all_combined_data_list <- readRDS("Data_all_training_data.rds")
 
 # Load the testing data
-test_data <- readRDS("test_data.rds")
+test_data <- readRDS("Data_test_data.rds")
 
 # Extract the testing set
 test_samples_dtm <- test_data$dtm
@@ -142,7 +142,7 @@ for (sample_key in names(all_combined_data_list)) {
 }
 
 # Save evaluation results
-saveRDS(evaluation_results, "evaluation_results.rds")
+saveRDS(evaluation_results, "Data_evaluation_results.rds")
 
 
 
@@ -179,4 +179,4 @@ for (result_key in names(evaluation_results)) {
 }
 
 # Save normalized evaluation results
-saveRDS(normalized_evaluation_results, "normalized_evaluation_results.rds")
+saveRDS(normalized_evaluation_results, "Data_normalized_evaluation_results.rds")

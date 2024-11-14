@@ -2,7 +2,7 @@
 library(ggplot2)
 
 # Load evaluation results for pages
-pages_evaluation_results <- readRDS("pages_evaluation_results.rds")
+pages_evaluation_results <- readRDS("Data_pages_evaluation_results.rds")
 View(pages_results_df)
 # Convert evaluation results to a data frame with overall scores
 # Convert evaluation results to a data frame with overall scores

@@ -4,10 +4,10 @@ library(topicmodels)
 library(ldatuning)
 
 # Load the training data
-all_pages_data_list <- readRDS("all_pages_data.rds")
+all_pages_data_list <- readRDS("Data_all_pages_data.rds")
 
 # Load the testing data for pages (replace with your actual testing data)
-pages_test_data <- readRDS("pages_test_data.rds")
+pages_test_data <- readRDS("Data_pages_test_data.rds")
 
 # Function to calculate coherence
 calculate_coherence <- function(lda_model, dtm) {
@@ -161,7 +161,7 @@ for (page_key in names(all_pages_data_list)) {
 }
 
 # Save evaluation results for pages
-saveRDS(pages_evaluation_results, "pages_evaluation_results.rds")
+saveRDS(pages_evaluation_results, "Data_pages_evaluation_results.rds")
 
 
 # ... (previous code)
@@ -199,5 +199,5 @@ for (result_key in names(pages_evaluation_results)) {
 }
 
 # Save normalized evaluation results
-saveRDS(normalized_pages_results, "normalized_pages_results.rds")
+saveRDS(normalized_pages_results, "Data_normalized_pages_results.rds")
 

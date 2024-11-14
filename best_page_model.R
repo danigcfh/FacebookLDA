@@ -5,7 +5,7 @@ library(cluster)
 library(factoextra)
 
 # Load evaluation results
-pages_results <- readRDS("pages_evaluation_results.rds")
+pages_results <- readRDS("Data_pages_evaluation_results.rds")
 str(pages_results)
 
 # Convert evaluation results to a data frame with overall scores
