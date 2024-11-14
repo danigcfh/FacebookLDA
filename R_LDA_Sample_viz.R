@@ -46,3 +46,9 @@ create_heatmap(results_df, "Overall Perplexity Heatmap", "overall_perplexity")
 
 # Plot overall combined metric heatmap 
 create_heatmap(results_df, "Overall Combined Metric Heatmap", "combined_metric")
+
+
+top_models <- results_df[order(-results_df$combined_metric), ][1:10, ]
+print(top_models)
+
+
