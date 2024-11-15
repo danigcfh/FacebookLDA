@@ -1,17 +1,53 @@
-# FacebookLDA
 
 
-This repository is made in the framework of my PhD research and it aims to ensure the possibility of reproducibility if needed. Without including the raw data, this repository contains all the manipulations made to Facebook data extracted from CORTEXT. It includes:
+# **FacebookLDA**
 
+This repository was created as part of my PhD research in political communication. It aims to ensure reproducibility (without including raw data) and provides all scripts and methods used to process Facebook data extracted from **CORTEXT**. The dataset includes posts produced between 2020 and 2021.
 
-- The creation of randomized representative samples from the initial corpus as well as individual samples from every individual page studied and a test sample (LDA_Creation)
-- pre-processing of the corpus and creation of multiple LDA models iterating over several k and alpha values(LDA_Creation)
-- Evaluation of coherence and perplexity of all models with a test sample order to identify best performance (LDA_Sample_eval and LDA_pages_eval)
-- Visualization of performance evaluation (LDA_Sample_viz and LDA_pages_viz)
-- Application of the best performing models to an evaluation sample to identify topic distribution (LDA_SampleTopicDistribution)
-- Visualization of topic-distribution (rplot11, rplot13) and identification of emergent clusters via hclust (LDA_SampleTopicDistribution)
-- Miscellaneous analysis (mis_analysis)
+### **Contents**
 
-This is not entirely comprehensive nor finished but provides an overview of my work thus far.
+1. **R_LDA_Creation**:
+    - Generates randomized representative samples from the initial corpus.
+    - Creates individual samples for each page studied and a test sample.
+    - Pre-processes the text data.
+    - Builds multiple LDA models, iterating over various *k* and *alpha* values.
 
+2. **R_LDA_Sample_eval** and **LDA_pages_eval**:
+    - Evaluates model coherence and perplexity using the test sample.
+    - Measures the performance of LDA models.
 
+3. **R_LDA_Sample_viz** and **LDA_pages_viz**:
+    - Visualizes the evaluation of model performance.
+
+4. **R_LDA_Best_Test**:
+    - Applies the best-performing LDA model to predict topics in the test dataset.
+    - Conducts sentiment and emotion analysis using the **syuzhet** package, with normalization of emotion values.
+    - Identifies the most prevalent topics and emotions in hierarchical order for easier interpretation.
+    - Creates a consolidated dataset with all analysis outputs.
+
+5. **R_Best_Topic_Viz**:
+    - Constructs confusion matrices for topic distribution using hierarchical exact matching.
+    - Generates heatmaps to visualize topic distribution.
+    - Identifies emergent clusters using hierarchical clustering (*hclust*).
+
+6. **R_Emotion_Viz**:
+    - Constructs confusion matrices for emotion distribution using hierarchical exact matching.
+    - Creates heatmaps for emotion visualization.
+    - Identifies emotion-based clusters via *hclust*.
+
+7. **R_Combined_Viz**:
+    - Combines topics and emotions using Manhattan distance metrics.
+    - Creates heatmaps for combined topic-emotion metrics.
+    - Identifies clusters using *hclust*.
+
+---
+
+### **Usage Notes**
+
+- This repository does not include raw data due to privacy considerations.
+- It is a work-in-progress and may not yet cover all aspects of the analysis.
+- Scripts are designed to balance methodological soundness and practical usability for political communication research.
+
+### **Contact**
+
+Feel free to reach out with questions or feedback regarding this repository or its methodologies.
