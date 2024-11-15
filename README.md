@@ -25,17 +25,12 @@ This repository was created as part of my PhD research in political communicatio
     - Identifies the most prevalent topics and emotions in hierarchical order for easier interpretation.
     - Creates a consolidated dataset with all analysis outputs.
 
-5. **R_Best_Topic_Viz**:
-    - Constructs confusion matrices for topic distribution using hierarchical exact matching.
-    - Generates heatmaps to visualize topic distribution.
+5. **R_Best_Topic_Viz and R_Emotion_Viz**:
+    - Constructs confusion matrices for topic and emotion distribution respectively using hierarchical exact matching.
+    - Generates heatmaps to visualize distribution.
     - Identifies emergent clusters using hierarchical clustering (*hclust*).
 
-6. **R_Emotion_Viz**:
-    - Constructs confusion matrices for emotion distribution using hierarchical exact matching.
-    - Creates heatmaps for emotion visualization.
-    - Identifies emotion-based clusters via *hclust*.
-
-7. **R_Combined_Viz**:
+6. **R_Combined_Viz**:
     - Combines topics and emotions using Manhattan distance metrics.
     - Creates heatmaps for combined topic-emotion metrics.
     - Identifies clusters using *hclust*.
