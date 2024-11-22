@@ -46,3 +46,6 @@ This repository was created as part of my PhD research in political communicatio
 ### **Contact**
 
 Feel free to reach out with questions or feedback regarding this repository or its methodologies.
+email: daniela.gonzalez@sciencespo.fr
+
+This work © 2024 by Daniela González is licensed under CC BY-NC-SA 4.0 
