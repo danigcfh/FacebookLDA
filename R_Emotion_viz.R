@@ -19,7 +19,7 @@ library(gplots)
 library(viridis)
 
 # Load data
-tests_df <- read_csv("tests_df.csv")
+tests_df <- read_csv("Data_tests_df.csv")
 
 library(gplots)
 library(viridis)
@@ -60,10 +60,11 @@ for (i in 1:num_pages) {
 saveRDS(confusion_matrix, "confusion_matrix_emotion.rds")
 
 # Plot heatmap with row and column colors
-png("confusion_matrix_heatmap_emotions_sentiments.png", width = 1200, height = 1200)
+png("Viz_Heatmap_Emotion.png", width = 1200, height = 1200)
 heatmap.2(confusion_matrix,
           trace = "none",
           col = viridis(100),
+          ColSideColors= column_colors,
           RowSideColors = column_colors,  # Row colors for dominant emotion
           labRow = tests_df$account_handle,
           labCol = tests_df$account_handle,

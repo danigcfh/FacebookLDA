@@ -13,7 +13,7 @@ library(topicmodels)
 library(viridis)
 
 # Load data
-tests_df <- read_csv("tests_df.csv")
+tests_df <- read_csv("Data_tests_df.csv")
 
 
 # Initialize confusion matrix with specific topic match levels
@@ -39,18 +39,17 @@ for (i in 1:num_pages) {
   }
 }
 
-saveRDS(confusion_matrix, "confusion_matrix_topic.rds")
 
 
 # Define a color gradient for topic clusters
 topic_palette <- colorRampPalette(c("white", "darkblue"))(7)
 topic_colors <- setNames(topic_palette, paste0("Topic_", 1:7))
-page_colors <- topic_colors[paste0("Topic_", dominant_topics_df$V1)]
+page_colors <- topic_colors[paste0("Topic_", tests_df$V1)]
 
 
 # Plot heatmap of confusion matrix
 # Save heatmap as a PNG
-png("confusion_matrix_heatmap.png", width = 1200, height = 1200)
+png("Viz_heatmap_topic.png", width = 1200, height = 1200)
 heatmap.2(confusion_matrix,
           trace = "none",
           col = viridis(100),
