@@ -2,7 +2,7 @@
 library(topicmodels)  # For LDA modeling
 library(FactoMineR)   # For PCA and clustering
 library(factoextra)   # For visualization of PCA results
-library(tidyr)
+library(tidyverse)
 library(proxy)
 library(gplots)
 library(dplyr)
@@ -14,6 +14,7 @@ library(viridis)
 
 # Load data
 tests_df <- read_csv("Data_tests_df.csv")
+dominant_topics_df <- read_csv("dominant_topics_df.csv")
 
 
 # Initialize confusion matrix with specific topic match levels
@@ -50,7 +51,7 @@ page_colors <- topic_colors[paste0("Topic_", tests_df$V1)]
 # Plot heatmap of confusion matrix
 # Save heatmap as a PNG
 png("Viz_heatmap_topic.png", width = 1200, height = 1200)
-heatmap.2(confusion_matrix,
+heatmap.2(confusion_matrix_topic,
           trace = "none",
           col = viridis(100),
           RowSideColors = page_colors,  # Custom topic colors for rows
@@ -66,11 +67,11 @@ legend("topright", legend = paste0("Topic ", 1:7), fill = topic_palette, title =
 dev.off() 
 
 # Convert confusion matrix to a distance matrix for hierarchical clustering
-distance_matrix <- as.dist(1 - confusion_matrix)
+distance_matrix <- as.dist(1 - confusion_matrix_topic)
 hc <- hclust(distance_matrix, method = "ward.D2")
 
 # Plot dendrogram of page similarity
-plot(hc, labels = rownames(confusion_matrix), main = "Dendrogram of Page Similarity", xlab = "", sub = "", cex = 0.7)
+plot(hc, labels = rownames(confusion_matrix_topic), main = "Dendrogram of Page Similarity", xlab = "", sub = "", cex = 0.7)
 
 # Add a legend for topic colors
 legend("topright", legend = paste0("Topic ", 1:7), fill = topic_palette, title = "Dominant Topics")

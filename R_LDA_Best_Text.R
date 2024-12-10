@@ -4,37 +4,25 @@ library(FactoMineR)   # For PCA and clustering
 library(factoextra)   # For visualization of PCA results
 library(tidyr)
 library(proxy)
-library(gplots)
 library(dplyr)
 library(tm)  # For text preprocessing
 library(text2vec)  # For text vectorization
-library(ggplot2)  # For visualization
-library(topicmodels)
-library(viridis)
 library(syuzhet)
 
 # Load LDA model and test data
 data <- readRDS("Data_all_training_data.rds")
 best_sample_model <- data$sample_3[[8]]$lda_model
-test_data <- readRDS("Data_test_data.rds")
-
-# Combine test data while ensuring no overlap with training data
-tests <- bind_rows(test_data$posts$sample_data, 
-                   data$sample_5$sample_data, 
-                   data$sample_1$sample_data, 
-                   data$sample_2$sample_data) %>%
-  anti_join(data$sample_3$sample_data) %>%
-  distinct()  # Remove duplicates
+best_sample_text <- data$sample_3$sample_data
 
 # Summarize combined data for text processing
-tests_df <- tests %>%
+text_df <- best_sample_text %>%
   group_by(account_handle) %>%
   summarize(text = paste(text, collapse = "\n"), Country = unique(account_page_admin_top_country))
-View(tests_df)
+View(text_df)
 
 ## Start with the LDA topic identification
 # Preprocess text using the tm package
-corpus <- Corpus(VectorSource(tests_df$text)) %>%
+corpus <- Corpus(VectorSource(text_df$text)) %>%
   tm_map(content_transformer(tolower)) %>%
   tm_map(removePunctuation) %>%
   tm_map(removeNumbers) %>%
@@ -52,29 +40,28 @@ dtm <- dtm[rowSums(as.matrix(dtm) > 0) > 0, ]
 dtm_matrix <- as.matrix(dtm)
 
 # Compute posterior topics for test documents using LDA model
-test_topics <- posterior(best_sample_model, newdata = as.matrix(dtm))$topics
+text_topics <- posterior(best_sample_model, newdata = as.matrix(dtm))$topics
 
 # Convert document-topic matrix to a data frame
-doc_topic_df <- as.data.frame(test_topics)
+doc_topic_df <- as.data.frame(text_topics)
 
 # Extract top 6 dominant topics for each document
 dominant_topics_df <- as.data.frame(t(apply(doc_topic_df, 1, function(x) order(x, decreasing = TRUE)[1:6])))
 names(dominant_topics_df) <- paste0("V", 1:6)
-tests_df <- cbind(tests_df, dominant_topics_df)
-write.csv(dominant_topics_df,"dominant_topics_df.csv", row.names = FALSE)
+text_df <- cbind(text_df, dominant_topics_df)
 
 ## Follow with Syuzet for emotion analysis
 
 # Apply sentiment analysis on each post's text
-sentiment_results <- get_nrc_sentiment(tests_df$text, language = "spanish")
+sentiment_results <- get_nrc_sentiment(text_df$text, language = "spanish")
 
 # Combine sentiment results with the original dataframe
-tests_df <- cbind(tests_df, sentiment_results)
+text_df <- cbind(text_df, sentiment_results)
 
 # Define emotion columns
 emotion_columns <- c("anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust")
 # Normalize emotion scores
-tests_df <- tests_df %>%
+text_df <- text_df %>%
   rowwise() %>%
   mutate(
     # Calculate total emotion score for normalization
@@ -85,14 +72,14 @@ tests_df <- tests_df %>%
   ungroup()
 
 # Calculate the mean of the total emotion scores across all observations
-mean_total_emotion_score <- mean(tests_df$total_emotion_score, na.rm = TRUE)
+mean_total_emotion_score <- mean(text_df$total_emotion_score, na.rm = TRUE)
 
 # Add "highly_emotional" column based on whether the total emotion score is above the mean
-tests_df <- tests_df %>%
+text_df <- text_df %>%
   mutate(highly_emotional = total_emotion_score > mean_total_emotion_score)
 
 # Rank normalized emotions for each row and store in separate columns
-tests_df <- tests_df %>%
+text_df <- text_df %>%
   mutate(
     # Rank normalized emotions for each row
     ranked_emotions = pmap(select(., starts_with("norm_")), ~ {
@@ -119,14 +106,14 @@ tests_df <- tests_df %>%
 
 
 # Identify dominant topic for each page
-tests_df <- cbind(tests_df, dominant_topic = apply(test_topics, 1, which.max))
+text_df <- cbind(text_df, dominant_topic = apply(text_topics, 1, which.max))
 
 # Calculate the dominant emotion by identifying the highest normalized emotion score for each page
-tests_df <- tests_df %>%
+text_df <- text_df %>%
   rowwise() %>%
   mutate(dominant_emotion = emotion_columns[which.max(c_across(starts_with("norm_")))])
 
 #Save final df with all the information
 
-write.csv(tests_df,"Data_tests_df.csv", row.names = FALSE)
+write.csv(text_df,"Data_text_df.csv", row.names = FALSE)
 
