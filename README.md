@@ -43,6 +43,26 @@ This repository was created as part of my PhD research in political communicatio
 - It is a work-in-progress and may not yet cover all aspects of the analysis.
 - Scripts are designed to balance methodological soundness and practical usability for political communication research.
 
+
+### License and Usage Guidelines
+This repository is licensed under CC BY-NC-SA 4.0, which ensures that the code is free to use, share, and modify under the following terms:
+1. **What You Can Do**
+   - Use for Non-Commercial Purposes: You may freely use this code for research, education, or personal projects that do not involve commercial activity.
+   - Modify and Adapt: You are encouraged to modify and adapt the code to suit your own purposes.
+   - Share Your Modifications: If you modify or build upon this code, you must share your contributions under the same license (CC BY-NC-SA 4.0).
+   - Credit the Author: When using or sharing this code, please provide proper attribution, including:
+      - My name as the original author.
+      - A link to this repository.
+      - An  indication of any changes you made.
+2. **What You Cannot Do**
+   - Commercial Use: You may not use this code, or any derivative works, for commercial purposes without explicit permission.
+      - This includes selling, licensing, or otherwise monetizing the code or its derivatives.
+      - Re-License Under Incompatible Terms: Derivative works must also remain open and licensed under CC BY-NC-SA 4.0.
+
+### My Philosophy
+This code was developed as part of a PhD project funded by the French state. My work reflects the principles of open science and public accessibility. I believe that knowledge and science should remain open and free, avoiding commercialization that could restrict access or benefit only private actors. By sharing this work under these terms, I aim to support collaborative research and equitable access to scientific tools.
+
+
 ### **Contact**
 
 Feel free to reach out with questions or feedback regarding this repository or its methodologies.
