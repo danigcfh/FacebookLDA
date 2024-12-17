@@ -20,6 +20,7 @@ terms <- as.data.frame(terms(best_sample_model, 100))  # Extract top 10 terms fo
 colnames(terms_per_topic) <- paste0("Topic_", seq_len(ncol(terms_per_topic)))
 terms <- terms %>%
   pivot_longer(cols = everything(), names_to = "Topic", values_to = "Word") 
+terms <- terms[order(terms$Topic),]
 
 write_xlsx(terms, "LDA_Best_terms.xlsx") #export data for manual annotation
 
