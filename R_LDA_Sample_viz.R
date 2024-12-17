@@ -37,15 +37,16 @@ create_heatmap <- function(data, title, value_column) {
     facet_wrap(~ factor(alpha), scales = "free_y", ncol = 2) 
   }
 
-# Example usage:
 # Plot overall coherence heatmap 
 create_heatmap(results_df, "Overall Coherence Heatmap", "overall_coherence")
 
 # Plot overall perplexity heatmap 
 create_heatmap(results_df, "Overall Perplexity Heatmap", "overall_perplexity")
 
+png("Viz_LDA_eval_combined_metric.png", width = 1200, height = 1200)
 # Plot overall combined metric heatmap 
 create_heatmap(results_df, "Overall Combined Metric Heatmap", "combined_metric")
+dev.off()
 
 
 top_models <- results_df[order(-results_df$combined_metric), ][1:10, ]

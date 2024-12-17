@@ -61,5 +61,8 @@ create_heatmap(pages_results_df, "Overall Coherence Heatmap for Pages", "overall
 # Plot overall perplexity heatmap 
 create_heatmap(pages_results_df, "Overall Perplexity Heatmap for Pages", "overall_perplexity", num_labels = 7)
 
-# Plot overall combined metric heatmap 
+# Plot and save overall combined metric heatmap 
+
+png("Viz_LDA_eval_combined_metric_pages.png", width = 1200, height = 1200)
 create_heatmap(pages_results_df, "Overall Combined Metric Heatmap for Pages", "combined_metric", num_labels = 7)
+dev.off()

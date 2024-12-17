@@ -60,6 +60,7 @@ text_df <- cbind(text_df, sentiment_results)
 
 # Define emotion columns
 emotion_columns <- c("anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust")
+
 # Normalize emotion scores
 text_df <- text_df %>%
   rowwise() %>%

@@ -15,6 +15,7 @@ This repository was created as part of my PhD research in political communicatio
 2. **R_LDA_Sample_eval** and **LDA_pages_eval**:
     - Evaluates model coherence and perplexity using the test sample.
     - Measures the performance of LDA models.
+    - The best LDA model identified is available in this repository in the file **Data_best_LDA_model.rds**
 
 3. **R_LDA_Sample_viz** and **LDA_pages_viz**:
     - Visualizes the evaluation of model performance per LDA model created from each sample and page respectively. 
@@ -23,17 +24,36 @@ This repository was created as part of my PhD research in political communicatio
     - Applies the best-performing LDA model to predict topics in the original text processed and in the test dataset respectively.
     - Conducts sentiment and emotion analysis using the **syuzhet** package, with normalization of emotion values.
     - Identifies the most prevalent topics and emotions in hierarchical order for easier interpretation.
-    - Creates a consolidated dataset with all analysis outputs.
+    - Creates a consolidated dataset with all analysis outputs, a summary of these outputs is available in the files **Data_tests_df_filter** and **Data_text_df_filter**
 
 5. **R_Best_Topic_Viz and R_Emotion_Viz**:
     - Constructs confusion matrices for topic and emotion distribution respectively using hierarchical exact matching.
-    - Generates heatmaps to visualize distribution.
+    - Generates heatmaps to visualize similarity distribution.
     - Identifies emergent clusters using hierarchical clustering (*hclust*).
 
 6. **R_Combined_Viz**:
     - Combines topics and emotions using Manhattan distance metrics.
     - Creates heatmaps for combined topic-emotion metrics.
     - Identifies clusters using *hclust*.
+
+### **Data available**
+
+1. ### **Visualizations **
+**Viz_LDA_eval_combined_metric.png**: heatmap vizualization of the evaluation of LDA models created using a combined perplexity and coherence metric, it includes visualization per sample used and all K and alpha values.
+**Viz_LDA_eval_combined_metric_pages.png.png**: heatmap vizualization of the evaluation of LDA models created using a combined perplexity and coherence metric, it includes visualization per page used and all K and alpha values.
+**Viz_heatmap_topic.png**: heatmap visualization of topic-similarity distribution accross facebook pages from the best performing LDA model.
+**Viz_heatmap_emotions.png**: heatmap visualization of emotion-similarity distribution accross facebook pages.
+**Viz_combined_heatmap_manhattan.png**: heatmap visualization of combined emotion and topic similarity distribution accross facebook pages using manhattan distance.
+
+2. ### **LDA Model**
+**Data_best_LDA_model.rds**: contains the best performing model after perplexity and coherence analysis on testing data.
+
+3. ### **Data**
+**Data_text_df_filter.csv**: contains the topic distribution and the emotion distribution for the original training data, aggregated by page and without original text to preserve privacy.
+**Data_tests_df_filter.csv**: contains the topic distribution and the emotion distribution for the testing data, aggregated by page and without original text to preserve privacy.
+**Data_emotions_training_set.xlsx**: contains the emotion analysis per topic using the training data
+**Data_emotions_testing_set.xlsx**: contains the emotion analysis per topic using the testing data
+
 
 ---
 
