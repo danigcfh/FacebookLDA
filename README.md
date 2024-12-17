@@ -40,9 +40,13 @@ This repository was created as part of my PhD research in political communicatio
 
 1. ### **Visualizations **
 **Viz_LDA_eval_combined_metric.png**: heatmap vizualization of the evaluation of LDA models created using a combined perplexity and coherence metric, it includes visualization per sample used and all K and alpha values.
+
 **Viz_LDA_eval_combined_metric_pages.png.png**: heatmap vizualization of the evaluation of LDA models created using a combined perplexity and coherence metric, it includes visualization per page used and all K and alpha values.
+
 **Viz_heatmap_topic.png**: heatmap visualization of topic-similarity distribution accross facebook pages from the best performing LDA model.
+
 **Viz_heatmap_emotions.png**: heatmap visualization of emotion-similarity distribution accross facebook pages.
+
 **Viz_combined_heatmap_manhattan.png**: heatmap visualization of combined emotion and topic similarity distribution accross facebook pages using manhattan distance.
 
 2. ### **LDA Model**
@@ -50,8 +54,11 @@ This repository was created as part of my PhD research in political communicatio
 
 3. ### **Data**
 **Data_text_df_filter.csv**: contains the topic distribution and the emotion distribution for the original training data, aggregated by page and without original text to preserve privacy.
+
 **Data_tests_df_filter.csv**: contains the topic distribution and the emotion distribution for the testing data, aggregated by page and without original text to preserve privacy.
+
 **Data_emotions_training_set.xlsx**: contains the emotion analysis per topic using the training data
+
 **Data_emotions_testing_set.xlsx**: contains the emotion analysis per topic using the testing data
 
 
